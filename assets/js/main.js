@@ -30,3 +30,29 @@ function scrollHeader() {
 }
 
 window.addEventListener("scroll", scrollHeader);
+
+const accordionItems = document.querySelectorAll(".questions__item");
+
+accordionItems.forEach((item) => {
+  const accordionHeader = item.querySelector(".questions__header");
+
+  accordionHeader.addEventListener("click", () => {
+    const openItem = document.querySelector(".accordion-open");
+    toggleItem(item);
+    if (openItem && openItem !== item) {
+      toggleItem(openItem);
+    }
+  });
+});
+
+const toggleItem = (item) => {
+  const accordioncontent = item.querySelector(".questions__content");
+
+  if (item.classList.contains("accordion-open")) {
+    accordioncontent.removeAttribute("style");
+    item.classList.remove("accordion-open");
+  } else {
+    accordioncontent.style.height = accordioncontent.scrollHeight + "px";
+    item.classList.add("accordion-open");
+  }
+};
